@@ -1,0 +1,7 @@
+1638390429378	Delete element
+1638485890485	Encapsulate field 'cpf'
+1638488851758	Move 'web.xml' to 'META-INF'
+1638489029387	Move 'web.xml' to 'WEB-INF'
+1638489288156	Encapsulate field 'cpfUsuario'
+1638499414038	Encapsulate field 'nome'
+1638499448538	Encapsulate field 'quantidadeDeDocs'

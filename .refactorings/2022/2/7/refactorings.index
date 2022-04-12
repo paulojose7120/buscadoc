@@ -1,0 +1,20 @@
+1644320585799	Encapsulate field 'tamanho'
+1644321583387	Encapsulate field 'dataDeUpload'
+1644357687187	Encapsulate field 'nome'
+1644415980694	Encapsulate field 'desabled'
+1644422509160	Encapsulate field 'checkBoxDesabled'
+1644441803083	Encapsulate field 'path'
+1644442361412	Encapsulate field 'arquivo'
+1644577229829	Encapsulate field 'urlDocumento'
+1644582462061	Rename resource 'DriverArquivos'
+1644594550703	Convert local variable 'input' to field
+1644595923899	Extract method 'extracted'
+1644612464543	Rename resource 'Comprovante Inscricao.pdf'
+1644615765682	Delete element
+1644616032260	Delete element
+1644616071986	Delete element
+1644617290647	Move 'url.properties' to 'src'
+1644617915214	Move 'url.properties' to 'WEB-INF'
+1644619188706	Move '01.pdf' to 'WorkDrive'
+1644675370986	Encapsulate field 'usuario'
+1644675376060	Encapsulate field 'senha'

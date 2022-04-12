@@ -1,0 +1,7 @@
+1639332871745	Delete element
+1639512841635	Encapsulate field 'qtde'
+1639682126953	Encapsulate field 'pacienteSelecionado'
+1639787586971	Encapsulate field 'pacienteSelecionado'
+1639791456866	Encapsulate field 'documentos'
+1639848582294	Encapsulate field 'arquivo'
+1639859617451	Convert local variable 'file' to field

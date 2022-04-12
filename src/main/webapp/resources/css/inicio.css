@@ -1,0 +1,7 @@
+
+
+.corpo{width:100%; height:100%; background-color:green}
+#imagem-user{background-repeat:no-repeat;width:260px; height:260px;background-image:url(https://img1.gratispng.com/20180710/spp/kisspng-room-guest-house-internet-software-development-inn-icon-ig-5b44a1599f7625.3816238915312244096532.jpg); padding:50px;  transition-property: width, height;
+  transition-duration: 0.1s;}
+#imagem-user:hover{width:260px; height:260px;background-image:url(https://img1.gratispng.com/20180729/eko/kisspng-computer-icons-clip-art-instagram-icon-5b5db371a68c38.5202841415328674416822.jpg); padding:50px}
+

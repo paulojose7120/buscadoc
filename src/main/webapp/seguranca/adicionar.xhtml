@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title></title>
+		<h:outputStylesheet library="css" name="inicio.css"></h:outputStylesheet>
+		<h:outputScript name="locale-primefaces.js" library="js"></h:outputScript>
+	</h:head>
+		<h:body>
+
+
+
+	
+		<ui:composition template="/seguranca/template/template.xhtml">
+		
+		
+		<ui:define name="corpo">
+		
+
+		
+
+
+		<h:form id="form">
+			
+				  <p:dialog id="janelaDeDialogo"   header="Informe CPF válido" closable="true"	onHide="PF('novo-cadastro').show();"	 widgetVar="dlg2" height="400" width="550" showEffect="fade" modal="true">
+   			 		<p:ajax event="close" listener="#{redirecionaParaPaginaInicialMB.fecharJanela}"></p:ajax>
+   		
+		   		  <p:messages id="messages" showDetail="true" closable="true">
+		          <p:autoUpdate/>
+		          </p:messages>
+				  <p:panelGrid columns="2" id="coluna">
+  	   				
+  	   				
+	   					   				<p:outputLabel value="CPF:"/>
+	   						
+	   					 <p:inputMask 	 requiredMessage="O campo CPF não pode permanecer vazio!"	required="true"		mask="999.999.999-99"	 id="entradacpf"   value="#{janelaInserirMB.cpf}" disabled="#{janelaInserirMB.desabled}">
+	   						<f:validator validatorId="validator.validaNovo"/>
+	   					 </p:inputMask>
+	   				
+	   				<p:outputLabel value="Vacinado sem CPF:"></p:outputLabel>
+  	   			 	<p:selectBooleanCheckbox value="#{janelaInserirMB.checkBoxDesabled}" valueChangeListener="#{janelaInserirMB.checkBoxAlterado}">
+  	   			 		<p:ajax update="entradacpf"></p:ajax>
+  	   			 	</p:selectBooleanCheckbox> 
+	   				
+	   				<p:commandButton  		ajax="true" value="Pesquisar" id="botao" action="#{janelaInserirMB.verificaCPF}">
+	   				
+	   				</p:commandButton>
+				
+					</p:panelGrid>
+				
+				
+			
+			</p:dialog>
+				</h:form>
+				<p:remoteCommand autoRun="true" action="#{janelaInserirMB.zeraArquivos}" update="formulario:label-qtde" oncomplete="PF('dlg2').show();"/>
+			
+			
+			
+			
+			
+				 <p:dialog header="Atenção!" id="janelaConfirma" widgetVar="confirmacao"  closeable="false" width="550" modal="true">  			  		
+   			  		<p:outputLabel value="O CPF digitado já está cadastrado no banco de dados, clique em CONTINUAR para cadastrar novamente o CPF ou clique em REDIRECIONAR para adicionar dados ao cadastro existente."></p:outputLabel>
+   			  		
+   			  		<p:commandButton value="Continuar" action="#{janelaInserirMB.botaoClicado}" icon="pi pi-check"></p:commandButton>
+   			  		<p:commandButton value="Redirecionar" action="#{janelaInserirMB.redireciona}" icon="pi pi-reply" ></p:commandButton>
+   			  		
+   			  	</p:dialog>
+			
+			
+			
+				<p:card>
+				
+						 <h:form enctype="nultipart/form-data" id="formulario">
+		<p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+	
+		<p:panelGrid columns="1" id="Panel_Grid">
+		
+		
+		<p:outputLabel value="nome:"></p:outputLabel>
+		<p:inputText value="#{janelaInserirMB.nome}" ></p:inputText>
+		
+		<p:outputLabel value="SUS:"></p:outputLabel>
+			<p:inputMask value="#{janelaInserirMB.sus}" mask="999-9999-9999-9999" id="sus"></p:inputMask>
+		
+		<p:outputLabel value="data Nasc.:"></p:outputLabel>
+			<p:calendar locale="pt" id="calendario"	navigator="true" yearRange="-122:+0"/>
+		
+		</p:panelGrid>
+		
+		  <p:panelGrid columns="1" id="coluna">
+		<p:fileUpload onadd="#{janelaInserirMB.somaDoc}" ajax="true" allowTypes="/(\.|\/)(jpe?g)$/"	invalidFileMessage="São permitidas somente imagens (jpeg ou jpg)" sequential="true" update="label-qtde" previewWidth="800" listener="#{janelaInserirMB.handleFileUpload}" chooseIcon="true" skinSimple="true" multiple="true" label="selecionar" cancelLabel="cancelar tudo" mode="advanced" >
+			<p:outputLabel id="label-qtde"  widgetVar="label-qtde-doc" value="Arquivo(s) selecionado(s): #{janelaInserirMB.qtdDocs}" style="font-style:italic;"></p:outputLabel>
+					</p:fileUpload>
+		
+		</p:panelGrid>
+
+
+		
+		<p:commandButton value="cadastrar" action="#{janelaInserirMB.cadastrar}" update="label-qtde"	>
+		 <p:confirm header="confirmacao" message="Tem certeza que os dados estão corretos?" icon="pi pi-exclamation-triangle"/>
+			<p:ajaxStatus onstart="PF('loading').show()" oncomplete="PF('loading').hide()"/>
+		</p:commandButton>
+		
+		
+		 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Sim" type="button"  styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+		
+		<p:dialog id="dialogo-loading" header="Aguarde!"	widgetVar="loading" height="50" width="400" closable="false">
+				<p:outputLabel>Por favor aguarde!</p:outputLabel>
+				<p:progressBar mode="indeterminate" style="height:6px"/>
+		
+		
+		</p:dialog>
+		
+		
+		<p:dialog id="dialogo-cadastro-sucesso" header="Sucesso!"	widgetVar="sucesso" height="50" width="400" closable="false">
+				<p:outputLabel>Cadastro realizado com sucesso! </p:outputLabel>
+				
+				<p:commandButton type="submit" value="Ok" onclick="PF('sucesso').hide()" action="adicionar?faces-redirect=true"  styleClass="ui-confirmdialog-yes" />
+				
+		</p:dialog>
+		</h:form>
+		</p:card>
+					
+		
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+		</ui:define>
+		
+		
+		
+	</ui:composition>
+	
+	</h:body>
+	
+	</html>

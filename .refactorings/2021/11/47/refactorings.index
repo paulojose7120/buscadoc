@@ -1,0 +1,11 @@
+1636855813488	Convert local variable 'tamanhoStrCPF' to field
+1637426481624	Encapsulate field 'Id'
+1637426736251	Encapsulate field 'nome'
+1637426744542	Encapsulate field 'usuario'
+1637426756378	Encapsulate field 'senha'
+1637426920136	Encapsulate field 'cargo'
+1637426926649	Encapsulate field 'ultimoLogin'
+1637426938689	Encapsulate field 'ultimoLogout'
+1637426945678	Encapsulate field 'cfp'
+1637426952635	Encapsulate field 'matricula'
+1637436003534	Encapsulate field 'sessionFactory'

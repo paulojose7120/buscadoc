@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Funciona</title>
+		<h:outputStylesheet library="css" name="inicio.css"></h:outputStylesheet>
+	</h:head>
+		<h:body>
+		<ui:composition template="/seguranca/template/template.xhtml">
+		
+		
+		<ui:define name="corpo">
+		
+		<h:form id="form">
+		<p:dialog id="janelaDeDialogo" header="Informe os dados" closable="true" widgetVar="dlg2" height="400" width="550" showEffect="fade" modal="true">
+   			
+   		  <p:messages id="messages" showDetail="true" closable="true">
+          <p:autoUpdate/>
+          </p:messages>
+
+               
+     				<p:panelGrid columns="2" id="coluna">
+   					<p:outputLabel value="Unidade de saúde:"/>
+   					
+	   				  <p:selectOneMenu  required="true" id="caixaSelecaoUnidade" valueChangeListener="#{listarMB.changeListener}">
+   					  <f:selectItems value="#{listarMB.listaUnidadeSaude}" var="unidade" itemValue="#{unidade.id}" itemLabel="#{unidade.nome}" >
+   					  </f:selectItems>
+   					  	<p:ajax update="caixaSelecaoUsuario"></p:ajax>
+   						 </p:selectOneMenu>
+	   				
+	   				
+	   				<p:outputLabel value="Agente de Saúde:"/>
+	   				
+	   				<p:selectOneMenu id="caixaSelecaoUsuario" value="listarMB.usuarioSelecionado" valueChangeListener="#{listarMB.changeUsuarioListener}" required="true">
+   					<f:selectItems value="#{listarMB.listaUsuario}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.nome}" >
+   					</f:selectItems>
+   							<p:ajax update="caixaSelecaoUsuario"></p:ajax>
+              		</p:selectOneMenu>
+	   				
+	   				
+
+	   				
+	   				<p:commandButton update="form2:tabela"	value="Pesquisar" id="botao" actionListener="#{listarMB.botaoAcao}">	
+	   								
+	   				</p:commandButton>
+					
+				
+				</p:panelGrid>
+				<p:blockUI block="janelaDeDialogo" trigger="botao"></p:blockUI>
+				</p:dialog>
+				</h:form>
+				<p:remoteCommand autoRun="true" oncomplete="PF('dlg2').show();"/>
+				
+				
+				<h:form id="form2">
+				<div>
+				
+				<p:dataTable id ="tabela" var="lista" value="#{listarMB.pacientes}" paginator="true" paginatorPosition="bottom">
+					
+							<p:column headerText="ID">
+						<h:outputText value="#{lista.id}" />
+					</p:column>
+					
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{lista.nome}" />
+					</p:column>
+					
+					
+					<p:column headerText="CPF">
+						<h:outputText value="#{lista.cpf}" />
+					</p:column>
+					
+					<p:column headerText="SUS">
+						<h:outputText value="#{lista.sus}" />
+					</p:column>
+					
+					<p:column headerText="Fichas">
+						<h:outputText value="#{lista.qtde}" />
+					</p:column>
+					
+
+					 <p:column style="width:3rem;text-align: center">
+                <p:commandButton actionListener="#{consultaMB.setSelecionado(lista)}"	update="janelaDownloads" oncomplete="PF('janelaDeDownloads').show()"
+                                 icon="pi pi-search" title="View">
+                 
+                </p:commandButton>
+            </p:column>
+				</p:dataTable>
+				</div>
+				
+				</h:form>
+				
+				
+				<p:dialog id="janelaDownloads" header="Janela de Downloads" closable="true" height="600" width="750" showEffect="fade" modal="true" widgetVar="janelaDeDownloads">
+					<h:form id="form-donwloads">
+					<p:card>
+							<p:dataTable id ="tabelas" var="lista" value="#{consultaMB.documentos}" paginator="true" paginatorPosition="bottom">
+							<p:column headerText="Nome">
+								<h:outputText value="#{lista.nome}" />
+							</p:column>
+							<p:column headerText="Upload">
+								<h:outputText value="#{lista.dataDeUpload}" />
+							</p:column>
+							
+							<p:column headerText="Download">
+							 <p:commandButton id="botaoBaixar" icon="pi pi-download" title="Baixar arquivo"  ajax="false">
+                 				<p:fileDownload value="#{fileDownloaderMB.file}"/>
+                			</p:commandButton>
+							</p:column>
+							<p:column headerText="Visualizar">
+							 <p:commandButton 	
+                                 icon="pi pi-eye" title="Visualizar" onclick="PF('pdf').show();">
+                 			</p:commandButton>
+							</p:column>
+							
+							<p:column headerText="Imprimir">
+							 <p:commandButton 	
+                                 icon="pi pi-print" title="Imprimir">
+                                 
+                                 <p:printer target="image"></p:printer>
+                                 
+                 			</p:commandButton>
+                 			
+                 		
+							</p:column>
+					</p:dataTable>	
+					</p:card>
+					</h:form>
+					</p:dialog  >
+					<p:dialog  widgetVar="pdf" id="pdf-dialog" height="600" width="750">			
+					    <h5>PDF</h5>
+						<p:media id="id-media" value="#{fileDownloaderMB.file}" width="100%" height="100%"  cache="false" player="pdf"/>
+				
+					</p:dialog>
+						<p:graphicImage id="image" rendered="false" value="/resources/image/user.png" />
+					</ui:define>
+					</ui:composition>
+	
+	</h:body>
+	
+	</html>

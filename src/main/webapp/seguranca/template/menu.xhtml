@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Pagina Inicial</title>
+		
+	</h:head>
+		<h:body>
+
+
+			<div class="menu">MENU
+					
+					  <h3>Menu de navegação</h3>
+					  <p:panelGrid columns="1">
+        
+        
+        <p:commandButton value="Início" action="#{menuNavegacaoMB.inicio}"></p:commandButton>
+        
+        
+        <p:commandButton value="Adcionar" action="#{menuNavegacaoMB.adicionar}"></p:commandButton>
+        
+        
+         <p:commandButton value="Editar"  action="#{menuNavegacaoMB.editar}"></p:commandButton>
+        
+        
+         <p:commandButton value="Remover"  action="#{menuNavegacaoMB.remover}"></p:commandButton>
+         
+         
+          <p:commandButton value="Consultar"  action="#{menuNavegacaoMB.consultar}"></p:commandButton>
+        </p:panelGrid>
+			</div>
+	
+	
+
+		<div id="versionamento">
+		BuscaDoc Saúde - Versão: 1.0.2
+		</div>
+	
+	
+	
+	
+	
+	</h:body>
+	
+	</html>

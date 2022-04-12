@@ -1,0 +1,48 @@
+1635360508161	Copy compilation unit
+1635360514425	Delete element
+1635360596476	Encapsulate field 'login'
+1635360606105	Encapsulate field 'senha'
+1635360612493	Encapsulate field 'cargo'
+1635360619422	Encapsulate field 'nome'
+1635360633919	Encapsulate field 'matricula'
+1635360669108	Copy compilation unit
+1635360675343	Delete element
+1635362326292	Encapsulate field 'nome'
+1635362334664	Encapsulate field 'dataFabricacao'
+1635362343175	Encapsulate field 'dataAplicacao'
+1635362349957	Encapsulate field 'dataValidade'
+1635371343227	Encapsulate field 'rev3'
+1635371350035	Encapsulate field 'd2'
+1635371354659	Encapsulate field 'rev2'
+1635371361290	Encapsulate field 'rev1'
+1635371368923	Encapsulate field 'd1'
+1635377197959	Move 'home' to 'seguranca]'
+1635377208676	Rename resource 'home'
+1635377306097	Rename resource 'sehuranca'
+1635377312037	Rename resource 'seguranca]'
+1635377324487	Move 'home.xhtml' to 'seguranca'
+1635377352082	Rename resource 'template'
+1635377381153	Rename resource 'templatexhtml'
+1635377428293	Delete element
+1635377463302	Rename resource 'topo'
+1635377875035	Move 'template' to 'seguranca'
+1635450675916	Move 'topo.css' to 'css'
+1635450975677	Copy file
+1635450982207	Rename resource 'topo2.css'
+1635451875242	Rename resource 'inicio.home'
+1635452495834	Move 'user.png' to 'image'
+1635470702836	Copy file
+1635470713263	Rename resource 'rodape2.css'
+1635507440968	Copy file
+1635509887049	Delete element
+1635509899877	Move 'inicio.xhtml' to 'seguranca'
+1635510249812	Rename resource 'template-assemby.xhtml'
+1635511531635	Rename resource 'template-assembly.xhtml'
+1635519293864	Copy file
+1635519297659	Copy file
+1635519313653	Rename resource 'inicio2.xhtml'
+1635519328779	Rename resource 'inicio3.xhtml'
+1635519359911	Copy file
+1635519370751	Copy file
+1635519379219	Copy file
+1635519390386	Copy file

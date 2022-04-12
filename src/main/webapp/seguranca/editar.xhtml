@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Funciona</title>
+		<h:outputStylesheet library="css" name="inicio.css"></h:outputStylesheet>
+	</h:head>
+		<h:body>
+
+
+	
+		<ui:composition template="/seguranca/template/template.xhtml">
+		
+		
+		<ui:define name="corpo">
+		
+		
+		
+				
+		
+	
+		<h:form id="form">
+	
+			
+				
+				
+				
+				 <p:dialog id="carrega" header="Carregando..." closable="true" widgetVar="dlg3" height="20" width="200" showEffect="fade" modal="true">
+				<p:progressBar></p:progressBar>
+				
+				</p:dialog>
+				  <p:dialog id="janelaDeDialogo" onHide="PF('dlg3').show"  header="Informe os dados" closable="true" widgetVar="dlg2" height="400" width="550" showEffect="fade" modal="true">
+   			  		<p:ajax event="close" listener="#{redirecionaParaPaginaInicialMB.fecharJanela}"></p:ajax>
+   		  <p:messages id="messages" showDetail="true" closable="true">
+          <p:autoUpdate/>
+          </p:messages>
+
+   			
+   				<p:selectOneMenu id="caixaSelecao" value="#{janelaEditaMB.itemSelecao}" required="true">
+   					  <f:selectItem itemValue="nome"  itemLabel="Nome" ></f:selectItem>
+   					  <f:selectItem itemValue="cpf"   itemLabel="CPF"  ></f:selectItem>
+   				<p:ajax  event="change" update="entradanome entradacpf"	listener="#{janelaEditaMB.alteraCampoDeSelecao}"></p:ajax>
+   					
+              		 </p:selectOneMenu>
+               
+     				<p:panelGrid columns="2" id="coluna">
+   					<p:outputLabel value="Nome:"/>
+	   					<p:inputText requiredMessage="O campo NOME não pode permanecer vazio!"	required="true" id="entradanome"  value="#{janelaEditaMB.nome}" disabled="#{janelaEditaMB.campoNomeDesabilitado}">
+	   						<f:validator validatorId="validator.validaCampoNomeVacina"/>
+	   					</p:inputText>
+	   				
+	   				
+	   					   				<p:outputLabel value="CPF:"/>
+	   						
+	   					<p:inputMask 	 requiredMessage="O campo CPF não pode permanecer vazio!"	required="true"		mask="999.999.999-99"	 id="entradacpf"   value="#{janelaEditaMB.campoCpf}"  disabled="#{janelaEditaMB.campoCPFDesabilitado}">
+	   						<f:validator validatorId="validator.validaJanelaSelecaoVacinado"/>
+	   					 </p:inputMask>
+	   						
+	   					
+	   				
+	   				
+	   				<p:commandButton  	update="form2:tabela"	value="Pesquisar" id="botao" action="#{janelaEditaMB.botaoClicado}">
+	   					
+	   				</p:commandButton>
+				
+				
+				</p:panelGrid>
+				<p:blockUI block="janelaDeDialogo" trigger="botao"></p:blockUI>
+				</p:dialog>
+				</h:form>
+				<p:remoteCommand autoRun="true" oncomplete="PF('dlg2').show();"/>
+			
+			
+				<h:form id="form2">
+				<div>
+				
+				<p:dataTable id ="tabela" var="lista" value="#{editaMB.pacientes}" paginator="true" paginatorPosition="bottom">
+					
+							<p:column headerText="ID">
+						<h:outputText value="#{lista.id}" />
+					</p:column>
+					
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{lista.nome}" />
+					</p:column>
+					
+					
+					<p:column headerText="CPF">
+						<h:outputText value="#{lista.cpf}" />
+					</p:column>
+					
+					<p:column headerText="SUS">
+						<h:outputText value="#{lista.sus}" />
+					</p:column>
+					
+					<p:column headerText="Fichas">
+						<h:outputText value="#{lista.qtde}" />
+					</p:column>
+					
+
+					 <p:column style="width:3rem;text-align: center">
+                <p:commandButton actionListener="#{editaMB.setPacienteSelecionado(lista)}"	 oncomplete="PF('janela-edicao').show()"
+                                 icon="pi pi-user-edit" title="Editar vacinado">
+                 
+                </p:commandButton>
+            </p:column>
+				</p:dataTable>
+				</div>
+				
+				</h:form>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<p:dialog id="janelaEdicao" widgetVar="janela-edicao" height="500" width="700" showEffect="fade" modal="true" closeable="true">
+				<h:form id="formEdicaoDados">
+			
+				<p:tabView>
+						 
+					<p:tab title="Dados Pessoais">
+						 <p:messages id="messagesAtualizacao" showDetail="true" closable="true">
+         				 <p:autoUpdate/>
+          				</p:messages>
+						<p:panelGrid columns="2">
+						<p:outputLabel id="nome" value="Nome:"></p:outputLabel>
+						<p:inputText  id="campo-nome" value="#{editaMB.nomeAtualizado}" required="true"	requiredMessage="O campo Nome não pode permanecer vazio!">
+							 <p:tooltip for="campo-nome" value="Digite o nome do paciente" position="right"/>
+						</p:inputText>
+						
+			
+						
+						
+						<p:outputLabel value="CPF:"/>
+	   						
+	   					<p:inputMask 	 requiredMessage="O campo CPF não pode permanecer vazio!"	required="true"			mask="999.999.999-99"	    value="#{editaMB.cpfAtualizado}">
+	   						<f:validator validatorId="validator.validaJanelaSelecaoVacinado"/>
+	   					 </p:inputMask>
+	   						
+				
+						
+						<p:outputLabel value="SUS"></p:outputLabel >
+						<p:inputText  id="campo-mae" value="#{editaMB.susAtualizado}" required="true"	requiredMessage="O campo SUS não pode permanecer vazio!">
+							<p:tooltip for="campo-mae" value="Digite o nome da mãe do paciente" position="right"/>
+						</p:inputText>
+						
+						
+						<p:outputLabel value="Nascimento:"></p:outputLabel>
+						<p:datePicker id="campo-nasc"	>
+							<p:tooltip for="campo-nasc" value="ex.: 01/01/2001" position="right"/>
+						</p:datePicker>
+						</p:panelGrid>
+						</p:tab>
+						
+						
+						<p:tab title="Dados de vacinação">
+						<p:panelGrid columns="2">
+						<p:outputLabel value="nome"></p:outputLabel>
+						<p:inputText ></p:inputText>
+						
+						
+						
+						<p:fileUpload label="Selecionar" multiple="true"/>
+						
+						</p:panelGrid>
+						</p:tab>		
+					
+					</p:tabView>
+					
+					<p:commandButton value="Atualizar" actionListener="#{editaMB.atualizar}" onsuccess="PF('atualizado-com-sucesso').show();"></p:commandButton>
+			</h:form>
+			</p:dialog>
+						
+			<p:dialog widgetVar="atualizado-com-sucesso" height="100" width="400" showEffect="fade" modal="true" >
+				<p:outputLabel  value="Dados atuializados com sucesso"></p:outputLabel>
+				<p:commandButton value="OK" onclick="PF('atualizado-com-sucesso').hide(); PF('janela-edicao').hide();" update="form2:tabela"></p:commandButton>
+			</p:dialog>
+	
+	
+	
+		</ui:define>
+		
+		
+	</ui:composition>
+	
+	</h:body>
+	
+	</html>

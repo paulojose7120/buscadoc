@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Funciona Porra</title>
+		<h:outputStylesheet library="css" name="inicio.css"></h:outputStylesheet>
+	</h:head>
+		<h:body>
+			
+			<ui:define name="janelaPaciente">
+
+
+
+<script>
+			function fechaJanela(){
+				
+				PF('dlg2').hide();
+	<!--Para chamar a tela de loading, remova as tags de comentários
+				PF('loading').show();-->
+			}
+		
+		
+		
+		</script>
+		
+		
+		
+		
+		<p:dialog widgetVar="loading" draggable="false"	height="50" width="200" closable="false" showEffect="fade" modal="true">
+			<p:outputLabel value="Aguarde..."></p:outputLabel>
+			<p:progressBar ></p:progressBar>
+			 <p:progressBar id="progressBarIndeterminate" style="height:6px" mode="indeterminate"/>
+		</p:dialog>
+		
+		
+		
+		
+		
+	
+	<p:dialog id="janelaDeDialogo" header="Informe os dados do(a) vacinado(a)" closable="false" widgetVar="dlg2" height="400" width="550" showEffect="fade" modal="true">
+   		  <h:form id="form">
+   		  <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+   			
+   				<p:selectOneMenu id="caixaSelecao" value="#{pesquisaPacienteDialogMB.itemSelecao}" required="true">
+   					  <f:selectItem itemValue="nome"  itemLabel="Nome" ></f:selectItem>
+   					  <f:selectItem itemValue="cpf"   itemLabel="CPF"  ></f:selectItem>
+   				<p:ajax  event="change" update="entradanome entradacpf"	listener="#{pesquisaPacienteDialogMB.alteraCampoDeSelecao}"></p:ajax>
+   					
+              		 </p:selectOneMenu>
+               
+     				<p:panelGrid columns="2" id="coluna">
+   					<p:outputLabel value="Nome:"/>
+	   					<p:inputText id="entradanome"  value="#{pesquisaPacienteDialogMB.nome}" disabled="#{pesquisaPacienteDialogMB.campoNomeDesabilitado}"/>
+	   				<p:outputLabel value="CPF:"/>
+	   						
+	   					<p:inputMask	mask="999.999.999-99"	 id="entradacpf"   value="#{pesquisaPacienteDialogMB.campoCpf}"  disabled="#{pesquisaPacienteDialogMB.campoCPFDesabilitado}">
+	   						<f:validator validatorId="validator.validaJanelaSelecaoVacinado"/>
+	   					 </p:inputMask>
+	   						
+	   					
+	   			
+	   				<p:commandButton process="@form"   value="Pesquisar" id="botao" action="#{pesquisaPacienteDialogMB.botaoClicado}"></p:commandButton>
+				</p:panelGrid>
+				
+				</h:form>
+			</p:dialog>
+
+			
+				
+				</ui:define>
+			
+				</h:body>
+				</html>
+			
